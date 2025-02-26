@@ -1,0 +1,175 @@
+/* Link to Google Fonts for Aptos (optional for StackBlitz) */
+@import url('https://fonts.googleapis.com/css2?family=Aptos&display=swap');
+
+/* Local fallback for Aptos (if Google Fonts is blocked) */
+@font-face {
+    font-family: 'Aptos';
+    src: url('aptos.woff2') format('woff2'),
+         url('aptos.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.accordion-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    font-family: "Aptos", Arial, Helvetica, sans-serif;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for modernity */
+}
+
+.accordion-toggle {
+    width: 100%;
+    padding: 15px 20px; /* Adjusted padding to match desired spacing */
+    background: #6a2c8f; /* Lighter purple for default state */
+    border: none;
+    border-radius: 8px; /* Rounded corners as in screenshot */
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600; /* Slightly lighter bold for professionalism */
+    color: #ffffff; /* White text for contrast */
+    display: flex;
+    justify-content: space-between; /* Ensure proper spacing between icon, text, and arrow */
+    align-items: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+    outline: none; /* Remove default outline for cleaner focus */
+}
+
+.accordion-toggle:hover, .accordion-toggle.active {
+    background: #4a186d; /* Darker purple for hover and active */
+    transform: translateY(-2px); /* Subtle lift effect for modern interaction */
+    box-shadow: 0 4px 15px rgba(74, 24, 109, 0.3); /* Enhanced shadow on hover/active */
+}
+
+.accordion-toggle:focus {
+    box-shadow: 0 0 0 3px rgba(74, 24, 109, 0.4); /* Focus ring for accessibility */
+}
+
+.workshop-icon {
+    width: 32px; /* Larger icon size, matching screenshot */
+    height: 32px;
+    /* Removed background image since we’re using Unicode */
+    margin-right: 15px; /* Increased spacing to prevent cramping */
+    display: flex; /* Ensure icon is centered vertically */
+    align-items: center; /* Center icon vertically */
+}
+
+.workshop-icon::before {
+    content: "⚙"; /* Unicode gear symbol for workshop icon */
+    color: #ffffff; /* White icon for contrast on purple */
+    font-size: 32px; /* Larger size to match screenshot */
+    line-height: 32px; /* Match height for vertical centering */
+}
+
+.arrow {
+    width: 20px; /* Size of the circle */
+    height: 20px;
+    font-size: 12px; /* Smaller font size for line arrow inside circle */
+    color: #ffffff; /* White arrow for contrast on purple */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #000000; /* Black outline for circle, matching your image */
+    border-radius: 50%; /* Circular shape */
+    margin-left: 10px; /* Add spacing to prevent cramping against title */
+    transition: transform 0.3s ease, content 0.3s ease; /* Transition for content change */
+}
+
+/* Custom arrow using Unicode characters for chevron-shaped arrows inside a black-outlined circle, white for contrast */
+.accordion-toggle:not(.active) .arrow::before {
+    content: "⯇"; /* Left-pointing chevron arrow inside circle when closed (Unicode U+2BC7) */
+}
+
+.accordion-toggle.active .arrow::before {
+    content: "⯆"; /* Downward-pointing chevron arrow inside circle when open (Unicode U+2BC6) */
+}
+
+/* Fallback if Unicode chevrons don’t render correctly (e.g., use >/< inside circle) */
+@supports not (content: "⯇") {
+    .accordion-toggle:not(.active) .arrow::before {
+        content: "<"; /* Fallback left arrow */
+        transform: rotate(-45deg);
+    }
+
+    .accordion-toggle.active .arrow::before {
+        content: "v"; /* Fallback down arrow */
+        transform: rotate(0deg);
+    }
+}
+
+.accordion-content {
+    padding: 20px; /* Increased padding for modern spacing */
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0; /* Lighter gray border for subtlety */
+    border-top: none;
+    border-radius: 0 0 8px 8px; /* Match toggle’s rounded corners */
+    line-height: 1.8; /* Slightly larger line height for readability */
+    color: #333333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.workshop-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #333333;
+}
+
+.workshop-table td {
+    border: 1px solid #e0e0e0; /* Lighter gray for modern, clean borders */
+    padding: 12px; /* Increased padding for modern spacing */
+    vertical-align: top;
+}
+
+.workshop-table tr:nth-child(even) {
+    background-color: #f5f8ff; /* Light blue-gray for modern, subtle contrast */
+}
+
+.agenda-list {
+    list-style-type: disc;
+    padding-left: 25px; /* Slightly more padding for modern look */
+    margin: 0;
+}
+
+.agenda-list li {
+    margin-bottom: 10px; /* Increased spacing for readability */
+    color: #666666;
+}
+
+@media (max-width: 600px) {
+    .accordion-container {
+        max-width: 100%;
+        margin: 10px;
+        padding: 5px;
+    }
+
+    .accordion-toggle {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    .workshop-table {
+        font-size: 12px;
+    }
+
+    .workshop-table td {
+        padding: 8px;
+    }
+
+    .agenda-list {
+        padding-left: 15px;
+    }
+
+    .workshop-icon::before {
+        font-size: 28px; /* Smaller icon on mobile */
+        margin-right: 10px;
+    }
+
+    .arrow {
+        width: 18px;
+        height: 18px;
+        font-size: 10px; /* Smaller arrow on mobile */
+        margin-left: 8px;
+    }
+}
