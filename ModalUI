@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --light: #ecf0f1;
+      --text: #333;
+      --error: #e74c3c;
+      --success: #27ae60;
+    }
+    
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .modal-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .header {
+      background: #f1f1f1;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 2px solid var(--secondary);
+    }
+    
+    .preset-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .preset-buttons button {
+      background: #95a5a6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s, transform 0.1s;
+    }
+    
+    .preset-buttons button.active {
+      background: var(--secondary);
+    }
+    
+    .preset-buttons button:hover:not(.active) {
+      background: #7f8c8d;
+      transform: scale(1.05);
+    }
+    
+    .totals {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    
+    .total-box-container {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+    
+    .total-box-container h3 {
+      margin: 0 0 5px 0;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    
+    .total-box {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 8px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .total-box.discount {
+      border-color: var(--error);
+    }
+    
+    .total-box.total-price {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .section {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      transition: all 0.3s;
+    }
+    
+    .section-header {
+      cursor: pointer;
+      background: #f1f1f1;
+      padding: 5px 10px;
+      margin: -10px -10px 10px;
+      border-radius: 4px 4px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .section-header::after {
+      content: '\25BC';
+      font-size: 12px;
+      transition: transform 0.3s;
+    }
+    
+    .collapsed .section-header::after {
+      transform: rotate(-90deg);
+    }
+    
+    .section-content {
+      display: block;
+    }
+    
+    .collapsed .section-content {
+      display: none;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    
+    .service-checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    input[type="number"], select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+    
+    input:invalid, select:invalid {
+      border-color: var(--error);
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+    
+    button {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s, transform 0.1s;
+    }
+    
+    button:hover:not(:disabled) {
+      background: #2980b9;
+      transform: scale(1.05);
+    }
+    
+    button:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+    
+    .unit-field {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    .service-breakdown {
+      margin-bottom: 10px;
+    }
+    
+    .service-breakdown h4 {
+      margin: 0 0 5px 0;
+      font-size: 14px;
+    }
+    
+    .service-breakdown p {
+      margin: 0;
+      font-size: 12px;
+    }
+    
+    .job-services, .job-conditions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .job-service, .job-condition {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .spinner {
+      display: none;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--secondary);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .error-message {
+      color: var(--error);
+      font-size: 12px;
+      margin-top: -5px;
+      margin-bottom: 10px;
+      display: none;
+    }
+    
+    .help-text {
+      font-size: 12px;
+      color: #7f8c8d;
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 600px) {
+      .totals {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .total-box-container {
+        min-width: 100%;
+      }
+      
+      .job-services, .job-conditions {
+        flex-direction: column;
+      }
+      
+      .job-service, .job-condition {
+        min-width: 100%;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="modal-container">
+    <div class="header">
+      <div class="preset-buttons">
+        <button onclick="applyPreset('Min Home')">Min Home</button>
+        <button onclick="applyPreset('Mid Home')">Mid Home</button>
+        <button onclick="applyPreset('Max Home')">Max Home</button>
+      </div>
+      <div class="totals">
+        <div class="total-box-container discount">
+          <h3>Discount Total</h3>
+          <div class="total-box discount" id="discountTotal">-$0.00</div>
+        </div>
+        <div class="total-box-container">
+          <h3>Base Cost Total (before discount)</h3>
+          <div class="total-box" id="baseCostTotal">$0.00</div>
+        </div>
+        <div class="total-box-container">
+          <h3>Condition Variables Total</h3>
+          <div class="total-box" id="modifiersTotal">$0.00</div>
+        </div>
+        <div class="total-box-container">
+          <h3>Total Price</h3>
+          <div class="total-box total-price" id="totalPrice">$0.00</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-content" style="display: flex; gap: 10px;">
+          <div style="flex: 1;">
+            <label for="laborRateInput">Labor Rate ($/min):</label>
+            <input type="number" id="laborRateInput" value="1" min="0" step="0.01" onchange="updatePricePreview()" required>
+            <div class="error-message" id="laborRate-error">Labor rate must be non-negative.</div>
+          </div>
+          <div style="flex: 1;">
+            <label for="discountRateInput">Discount Rate (%):</label>
+            <input type="number" id="discountRateInput" value="0" min="0" max="100" step="0.1" onchange="updatePricePreview()" required>
+            <div class="error-message" id="discountRate-error">Discount rate must be between 0 and 100.</div>
+          </div>
+          <div style="flex: 1;">
+            <label for="srpMarginInput">SRP Margin (%):</label>
+            <input type="number" id="srpMarginInput" value="30" min="0" step="0.1" onchange="updatePricePreview()" required>
+            <div class="error-message" id="srpMargin-error">Margin must be non-negative.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="section" id="breakdownSection">
+        <div class="section-header" onclick="toggleSection(this)">Breakdown</div>
+        <div class="section-content">
+          <div id="breakdown"></div>
+        </div>
+      </div>
+      
+      <div class="section" id="servicesSection">
+        <div class="section-header" onclick="toggleSection(this)">Job - Included Services</div>
+        <div class="section-content">
+          <label>Services:</label>
+          <div id="servicesContainer"></div>
+          <div class="error-message" id="services-error">Please select at least one service.</div>
+          
+          <div id="storiesField" style="display: none;">
+            <label for="storiesSelect">Window Wash: Exterior</label>
+            <select id="storiesSelect" onchange="updateServiceFields()">
+              <option value="1">1 Story</option>
+              <option value="2">2 Stories</option>
+              <option value="3">3 Stories</option>
+              <option value="4" selected>4+ Stories</option>
+            </select>
+            <div class="help-text">Select the number of stories for exterior window cleaning.</div>
+          </div>
+          
+          <div class="job-services">
+            <div class="job-service" id="windowWashExterior" style="display: none;">
+              <label>Window Wash: Exterior</label>
+              <div id="windowWashExteriorUnits"></div>
+            </div>
+            <div class="job-service" id="windowTrackCleaning" style="display: none;">
+              <label>Window Track Cleaning</label>
+              <div id="windowTrackCleaningUnits"></div>
+            </div>
+            <div class="job-service" id="roofWash" style="display: none;">
+              <label>Roof Wash</label>
+              <div id="roofWashUnits"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section" id="conditionsSection">
+        <div class="section-header" onclick="toggleSection(this)">Job - Condition Variables</div>
+        <div class="section-content">
+          <label for="jobConditionsSelect">Condition Variables:</label>
+          <select id="jobConditionsSelect" multiple onchange="updatePricePreview()"></select>
+          <div class="help-text">Hover over conditions for cost impact details.</div>
+          
+          <div class="job-conditions">
+            <div class="job-condition" id="windowWashConditions" style="display: none;">
+              <label>Window Wash</label>
+              <div id="windowWashConditionList"></div>
+            </div>
+            <div class="job-condition" id="windowTrackConditions" style="display: none;">
+              <label>Window Track Cleaning</label>
+              <div id="windowTrackConditionList"></div>
+            </div>
+            <div class="job-condition" id="roofWashConditions" style="display: none;">
+              <label>Roof Wash</label>
+              <div id="roofWashConditionList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button onclick="calculatePrice()">Calculate Price</button>
+      <button onclick="confirmReset()" style="background: #e74c3c; margin-left: 10px;">Reset</button>
+      <div class="spinner" id="spinner"></div>
+    </div>
+  </div>
+  
+  <script>
+    let cachedUnitFields = {};
+    let currentPreset = null;
+    
+    function fetchServices() {
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(services => {
+          populateServices(services);
+          showSpinner(false);
+        })
+        .withFailureHandler(error => {
+          console.error('Error loading services: ' + error.message);
+          alert('Error loading services: ' + error.message);
+          showSpinner(false);
+        })
+        .getServicesData();
+    }
+    
+    function populateServices(services) {
+      const container = document.getElementById("servicesContainer");
+      if (!container) {
+        console.error('Services container not found');
+        return;
+      }
+      
+      container.innerHTML = "";
+      services.forEach(service => {
+        const div = document.createElement("div");
+        div.className = "service-checkbox";
+        
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = `service-${service.name.replace(/\s+/g, '-')}`;
+        checkbox.value = service.name;
+        checkbox.onchange = updateServiceFields;
+        
+        const label = document.createElement("label");
+        label.htmlFor = checkbox.id;
+        label.textContent = service.name;
+        
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        container.appendChild(div);
+      });
+    }
+    
+    function updateServiceFields() {
+      const checkboxes = document.querySelectorAll("#servicesContainer input[type='checkbox']:checked");
+      const selectedServices = Array.from(checkboxes).map(cb => cb.value);
+      const storiesSelect = document.getElementById("storiesSelect");
+      const stories = storiesSelect ? parseInt(storiesSelect.value) || 4 : 4;
+      
+      document.getElementById("storiesField").style.display = 
+        selectedServices.includes("Window Cleaning: Exterior") ? "block" : "none";
+      
+      console.log('Selected Services for Unit Fields: ', selectedServices);
+      console.log('Stories: ', stories);
+      
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(unitFields => {
+          cachedUnitFields = unitFields;
+          console.log('Cached Unit Fields: ', cachedUnitFields);
+          displayUnitFields(unitFields);
+          showSpinner(false);
+          setTimeout(() => {
+            updatePricePreview();
+            hideErrors();
+          }, 300);
+        })
+        .withFailureHandler(error => {
+          console.error('Error loading units: ' + error);
+          alert('Error loading units: ' + error);
+          showSpinner(false);
+        })
+        .getUnitFields(selectedServices, stories);
+      
+      google.script.run
+        .withSuccessHandler(displayJobConditions)
+        .withFailureHandler(error => {
+          console.error('Error loading conditions: ' + error);
+          alert('Error loading conditions: ' + error);
+        })
+        .getJobConditions(selectedServices);
+    }
+    
+    function displayUnitFields(unitFields) {
+      const windowWashExterior = document.getElementById("windowWashExterior");
+      const windowTrackCleaning = document.getElementById("windowTrackCleaning");
+      const roofWash = document.getElementById("roofWash");
+      
+      if (!windowWashExterior || !windowTrackCleaning || !roofWash) {
+        console.error('Unit field containers not found');
+        return;
+      }
+      
+      windowWashExterior.style.display = "none";
+      windowTrackCleaning.style.display = "none";
+      roofWash.style.display = "none";
+      
+      if (unitFields["Window Cleaning: Exterior"]) {
+        windowWashExterior.style.display = "block";
+        const container = document.getElementById("windowWashExteriorUnits");
+        if (container) {
+          container.innerHTML = "";
+          Object.keys(unitFields["Window Cleaning: Exterior"]).forEach(unitType => {
+            const sanitizedService = "Window-Cleaning-Exterior".replace(/\s+/g, '-');
+            const sanitizedUnitType = unitType.replace(/\s+/g, '-');
+            const label = document.createElement("label");
+            label.htmlFor = `units-${sanitizedService}-${sanitizedUnitType}`;
+            label.textContent = unitType;
+            label.title = `Enter the number of ${unitType.toLowerCase()} panes`;
+            container.appendChild(label);
+            
+            const input = document.createElement("input");
+            input.type = "number";
+            input.id = `units-${sanitizedService}-${sanitizedUnitType}`;
+            input.value = unitFields["Window Cleaning: Exterior"][unitType] || 0;
+            input.min = "0";
+            input.required = true;
+            input.onchange = () => {
+              updatePricePreview();
+              validateUnitInputs();
+            };
+            container.appendChild(input);
+            console.log(`Created input with id: units-${sanitizedService}-${sanitizedUnitType}, value: ${input.value}`);
+          });
+        }
+      }
+      
+      if (unitFields["Window Track Cleaning"]) {
+        windowTrackCleaning.style.display = "block";
+        const container = document.getElementById("windowTrackCleaningUnits");
+        if (container) {
+          container.innerHTML = "";
+          Object.keys(unitFields["Window Track Cleaning"]).forEach(unitType => {
+            const sanitizedUnitType = unitType.replace(/\s+/g, '-');
+            const label = document.createElement("label");
+            label.htmlFor = `units-Window-Track-Cleaning-${sanitizedUnitType}`;
+            label.textContent = unitType;
+            label.title = `Enter the number of tracks`;
+            container.appendChild(label);
+            
+            const input = document.createElement("input");
+            input.type = "number";
+            input.id = `units-Window-Track-Cleaning-${sanitizedUnitType}`;
+            input.value = unitFields["Window Track Cleaning"][unitType] || 0;
+            input.min = "0";
+            input.required = true;
+            input.onchange = () => {
+              updatePricePreview();
+              validateUnitInputs();
+            };
+            container.appendChild(input);
+          });
+        }
+      }
+      
+      if (unitFields["Roof Wash"]) {
+        roofWash.style.display = "block";
+        const container = document.getElementById("roofWashUnits");
+        if (container) {
+          container.innerHTML = "";
+          Object.keys(unitFields["Roof Wash"]).forEach(unitType => {
+            const sanitizedUnitType = unitType.replace(/\s+/g, '-');
+            const label = document.createElement("label");
+            label.htmlFor = `units-Roof-Wash-${sanitizedUnitType}`;
+            label.textContent = unitType;
+            label.title = `Enter the square footage`;
+            container.appendChild(label);
+            
+            const input = document.createElement("input");
+            input.type = "number";
+            input.id = `units-Roof-Wash-${sanitizedUnitType}`;
+            input.value = unitFields["Roof Wash"][unitType] || 0;
+            input.min = "0";
+            input.required = true;
+            input.onchange = () => {
+              updatePricePreview();
+              validateUnitInputs();
+            };
+            container.appendChild(input);
+          });
+        }
+      }
+    }
+    
+    function displayJobConditions(conditions) {
+      const select = document.getElementById("jobConditionsSelect");
+      if (!select) {
+        console.error('Job conditions select element not found');
+        return;
+      }
+      select.innerHTML = "";
+      Object.entries(conditions).forEach(([service, conds]) => {
+        conds.forEach(condition => {
+          const option = document.createElement("div");
+          option.className = "tooltip";
+          
+          const opt = document.createElement("option");
+          opt.value = `${service}|${condition.name}`;
+          opt.textContent = `${service}: ${condition.name}`;
+          option.appendChild(opt);
+          
+          const tooltip = document.createElement("span");
+          tooltip.className = "tooltiptext";
+          tooltip.textContent = condition.help;
+          option.appendChild(tooltip);
+          
+          select.appendChild(option.firstChild);
+        });
+      });
+      
+      const windowWashConditions = document.getElementById("windowWashConditions");
+      const windowTrackConditions = document.getElementById("windowTrackConditions");
+      const roofWashConditions = document.getElementById("roofWashConditions");
+      
+      if (!windowWashConditions || !windowTrackConditions || !roofWashConditions) {
+        console.error('Condition containers not found');
+        return;
+      }
+      
+      windowWashConditions.style.display = "none";
+      windowTrackConditions.style.display = "none";
+      roofWashConditions.style.display = "none";
+      
+      if (conditions["Window Cleaning: Exterior"]) {
+        windowWashConditions.style.display = "block";
+        const list = document.getElementById("windowWashConditionList");
+        if (list) list.innerHTML = conditions["Window Cleaning: Exterior"].map(c => c.name).join(", ") || "None";
+      }
+      
+      if (conditions["Window Track Cleaning"]) {
+        windowTrackConditions.style.display = "block";
+        const list = document.getElementById("windowTrackConditionList");
+        if (list) list.innerHTML = conditions["Window Track Cleaning"].map(c => c.name).join(", ") || "None";
+      }
+      
+      if (conditions["Roof Wash"]) {
+        roofWashConditions.style.display = "block";
+        const list = document.getElementById("roofWashConditionList");
+        if (list) list.innerHTML = conditions["Roof Wash"].map(c => c.name).join(", ") || "None";
+      }
+    }
+    
+    function applyPreset(preset) {
+      currentPreset = preset;
+      document.querySelectorAll(".preset-buttons button").forEach(btn => btn.classList.remove("active"));
+      document.querySelector(`.preset-buttons button[onclick="applyPreset('${preset}')"]`).classList.add("active");
+      
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(config => {
+          resetForm();
+          const storiesSelect = document.getElementById("storiesSelect");
+          
+          if (!storiesSelect) {
+            console.error('Stories select element not found');
+            showSpinner(false);
+            return;
+          }
+          
+          // Select services
+          config.services.forEach(service => {
+            const checkbox = document.getElementById(`service-${service.name.replace(/\s+/g, '-')}`);
+            if (checkbox) {
+              checkbox.checked = true;
+            }
+            
+            if (service.stories) {
+              storiesSelect.value = service.stories;
+            }
+          });
+          
+          updateServiceFields();
+          
+          setTimeout(() => {
+            config.services.forEach(service => {
+              Object.entries(service.units).forEach(([unitType, value]) => {
+                const sanitizedService = service.name.replace(/\s+/g, '-');
+                const sanitizedUnitType = unitType.replace(/\s+/g, '-');
+                const input = document.getElementById(`units-${sanitizedService}-${sanitizedUnitType}`);
+                if (input) {
+                  input.value = value;
+                  input.dispatchEvent(new Event('change'));
+                }
+              });
+            });
+            
+            const jobConditions = document.getElementById("jobConditionsSelect");
+            if (jobConditions) {
+              Object.entries(config.conditions).forEach(([service, conds]) => {
+                conds.forEach(condition => {
+                  Array.from(jobConditions.options).forEach(option => {
+                    if (option.value === `${service}|${condition}`) {
+                      option.selected = true;
+                    }
+                  });
+                });
+              });
+            }
+            
+            displayJobConditions(Object.keys(config.conditions).reduce((acc, service) => {
+              acc[service] = config.conditions[service].map(name => ({
+                name,
+                help: "Preset condition"
+              }));
+              return acc;
+            }, {}));
+            
+            updatePricePreview();
+          }, 500);
+        })
+        .withFailureHandler(error => {
+          console.error('Error applying preset: ' + error);
+          alert('Error applying preset: ' + error);
+          showSpinner(false);
+        })
+        .getPresetConfig(preset);
+    }
+    
+    function calculatePrice() {
+      const button = this;
+      if (!validateInputs()) return;
+      
+      button.disabled = true;
+      button.textContent = 'Calculating...';
+      showSpinner(true);
+      
+      const selectedServices = getSelectedServices();
+      const unitCounts = getUnitCounts(selectedServices);
+      const jobModifiers = getJobModifiers();
+      const laborRateInput = document.getElementById("laborRateInput");
+      const srpMarginInput = document.getElementById("srpMarginInput");
+      const discountRateInput = document.getElementById("discountRateInput");
+      const storiesSelect = document.getElementById("storiesSelect");
+      
+      if (!laborRateInput || !srpMarginInput || !discountRateInput || !storiesSelect) {
+        console.error('Input elements not found');
+        showSpinner(false);
+        button.disabled = false;
+        button.textContent = 'Calculate Price';
+        return;
+      }
+      
+      const laborRate = Math.max(0, parseFloat(laborRateInput.value) || 1);
+      const srpMargin = Math.max(0, parseFloat(srpMarginInput.value) || 30);
+      const discountRate = Math.max(0, Math.min(100, parseFloat(discountRateInput.value) || 0));
+      const stories = parseInt(storiesSelect.value) || 4;
+      
+      console.log('Calculating Price with: ', { selectedServices, unitCounts, jobModifiers, laborRate, srpMargin, discountRate, stories });
+      
+      google.script.run
+        .withSuccessHandler(breakdown => {
+          updatePrice(breakdown);
+          button.disabled = false;
+          button.textContent = 'Calculate Price';
+          showSpinner(false);
+        })
+        .withFailureHandler(error => {
+          console.error('Calculation error: ' + error);
+          alert('Calculation error: ' + error);
+          button.disabled = false;
+          button.textContent = 'Calculate Price';
+          showSpinner(false);
+        })
+        .calculatePrice(selectedServices, unitCounts, jobModifiers, laborRate, srpMargin, discountRate, stories);
+    }
+    
+    function updatePricePreview() {
+      const laborRateInput = document.getElementById("laborRateInput");
+      const srpMarginInput = document.getElementById("srpMarginInput");
+      const discountRateInput = document.getElementById("discountRateInput");
+      const storiesSelect = document.getElementById("storiesSelect");
+      
+      if (!laborRateInput || !srpMarginInput || !discountRateInput || !storiesSelect) {
+        console.error('Input elements not found for preview');
+        return;
+      }
+      
+      if (!validateInputs(true)) return;
+      
+      const selectedServices = getSelectedServices();
+      if (selectedServices.length === 0) {
+        updatePrice({ totals: { base: 0, labor: 0, consumables: 0, modifiers: 0, discount: 0, margin: 0, total: 0 }, services: {} });
+        return;
+      }
+      
+      const unitCounts = getUnitCounts(selectedServices);
+      const jobModifiers = getJobModifiers();
+      const laborRate = Math.max(0, parseFloat(laborRateInput.value) || 1);
+      const srpMargin = Math.max(0, parseFloat(srpMarginInput.value) || 30);
+      const discountRate = Math.max(0, Math.min(100, parseFloat(discountRateInput.value) || 0));
+      const stories = parseInt(storiesSelect.value) || 4;
+      
+      console.log('Updating Price Preview with: ', { selectedServices, unitCounts, jobModifiers, laborRate, srpMargin, discountRate, stories });
+      
+      showSpinner(true);
+      google.script.run
+        .withSuccessHandler(updatePrice)
+        .withFailureHandler(error => {
+          console.error('Preview error: ' + error);
+          alert('Preview error: ' + error);
+          showSpinner(false);
+        })
+        .calculatePrice(selectedServices, unitCounts, jobModifiers, laborRate, srpMargin, discountRate, stories);
+    }
+    
+    function getSelectedServices() {
+      const checkboxes = document.querySelectorAll("#servicesContainer input[type='checkbox']:checked");
+      return Array.from(checkboxes).map(cb => cb.value);
+    }
+    
+    function getUnitCounts(selectedServices) {
+      const unitCounts = {};
+      selectedServices.forEach(service => {
+        unitCounts[service] = {};
+        Object.keys(cachedUnitFields[service] || {}).forEach(unitType => {
+          const sanitizedService = service.replace(/\s+/g, '-');
+          const sanitizedUnitType = unitType.replace(/\s+/g, '-');
+          const input = document.getElementById(`units-${sanitizedService}-${sanitizedUnitType}`);
+          const value = input ? parseInt(input.value) || 0 : 0;
+          unitCounts[service][unitType] = value;
+          if (!input) {
+            console.warn(`Input not found for ${service} - ${unitType}, ID checked: units-${sanitizedService}-${sanitizedUnitType}`);
+          } else {
+            console.log(`Found input for ${service} - ${unitType}, Value: ${value}, ID: units-${sanitizedService}-${sanitizedUnitType}`);
+          }
+        });
+      });
+      console.log('Unit Counts: ', unitCounts);
+      return unitCounts;
+    }
+    
+    function getJobModifiers() {
+      const jobModifiers = {};
+      const select = document.getElementById("jobConditionsSelect");
+      if (!select) {
+        console.error('Job conditions select element not found');
+        return jobModifiers;
+      }
+      Array.from(select.selectedOptions).forEach(opt => {
+        const [service, condition] = opt.value.split('|');
+        if (!jobModifiers[service]) jobModifiers[service] = [];
+        jobModifiers[service].push(condition);
+      });
+      console.log('Job Modifiers: ', jobModifiers);
+      return jobModifiers;
+    }
+    
+    function updatePrice(result) {
+      console.log('Update Price Result: ', result);
+      const breakdown = result.totals;
+      const services = result.services;
+      
+      document.getElementById("discountTotal").textContent = `-$${breakdown.discount || 0}`;
+      document.getElementById("baseCostTotal").textContent = `$${breakdown.base || 0}`;
+      document.getElementById("modifiersTotal").textContent = `$${breakdown.modifiers || 0}`;
+      document.getElementById("totalPrice").textContent = `$${breakdown.total || 0}`;
+      
+      let breakdownHtml = "";
+      if (Object.keys(services).length === 0) {
+        breakdownHtml = "No services processed. Check unit counts or logs for errors.";
+      } else {
+        Object.keys(services).forEach(service => {
+          breakdownHtml += `
+            <div class="service-breakdown">
+              <h4>${service}</h4>
+              <p>Labor: $${services[service].labor.toFixed(2)}</p>
+              <p>Consumables: $${services[service].consumables.toFixed(2)}</p>
+              <p>Modifier(s): $${services[service].modifiers.toFixed(2)}</p>
+              <p>Gross Profit: $${services[service].margin.toFixed(2)}</p>
+            </div>
+          `;
+        });
+      }
+      document.getElementById("breakdown").innerHTML = breakdownHtml;
+      showSpinner(false);
+    }
+    
+    function validateInputs(silent = false) {
+      hideErrors();
+      let isValid = true;
+      
+      const selectedServices = getSelectedServices();
+      const laborRateInput = document.getElementById("laborRateInput");
+      const srpMarginInput = document.getElementById("srpMarginInput");
+      const discountRateInput = document.getElementById("discountRateInput");
+      
+      if (!laborRateInput || !srpMarginInput || !discountRateInput) {
+        console.error('Input elements not found');
+        return false;
+      }
+      
+      const laborRate = parseFloat(laborRateInput.value) || 0;
+      const srpMargin = parseFloat(srpMarginInput.value) || 0;
+      const discountRate = parseFloat(discountRateInput.value) || 0;
+      
+      if (selectedServices.length === 0) {
+        showError("services-error", "Please select at least one service.");
+        isValid = false;
+      }
+      
+      if (laborRate < 0) {
+        showError("laborRate-error", "Labor rate must be non-negative.");
+        isValid = false;
+      }
+      
+      if (srpMargin < 0) {
+        showError("srpMargin-error", "Margin must be non-negative.");
+        isValid = false;
+      }
+      
+      if (discountRate < 0 || discountRate > 100) {
+        showError("discountRate-error", "Discount rate must be between 0 and 100.");
+        isValid = false;
+      }
+      
+      if (!validateUnitInputs() && !silent) {
+        showError("units-error", "Please enter valid unit counts (non-negative).");
+        isValid = false;
+      }
+      
+      if (!silent && !isValid) alert("Please fix the errors before calculating.");
+      return isValid;
+    }
+    
+    function validateUnitInputs() {
+      const selectedServices = getSelectedServices();
+      let isValid = true;
+      
+      selectedServices.forEach(service => {
+        Object.keys(cachedUnitFields[service] || {}).forEach(unitType => {
+          const sanitizedService = service.replace(/\s+/g, '-');
+          const sanitizedUnitType = unitType.replace(/\s+/g, '-');
+          const input = document.getElementById(`units-${sanitizedService}-${sanitizedUnitType}`);
+          if (input && parseInt(input.value) < 0) {
+            input.setCustomValidity("Unit count must be non-negative.");
+            input.reportValidity();
+            isValid = false;
+          } else if (input) {
+            input.setCustomValidity("");
+          } else {
+            console.warn(`Input not found for ${service} - ${unitType}, ID checked: units-${sanitizedService}-${sanitizedUnitType}`);
+          }
+        });
+      });
+      
+      return isValid;
+    }
+    
+    function showError(id, message) {
+      const error = document.getElementById(id);
+      if (error) {
+        error.textContent = message;
+        error.style.display = "block";
+      }
+    }
+    
+    function hideErrors() {
+      document.querySelectorAll(".error-message").forEach(el => el.style.display = "none");
+    }
+    
+    function toggleSection(header) {
+      header.parentElement.classList.toggle("collapsed");
+    }
+    
+    function confirmReset() {
+      if (confirm("Are you sure you want to reset all fields? This cannot be undone.")) {
+        resetForm();
+      }
+    }
+    
+    function resetForm() {
+      const checkboxes = document.querySelectorAll("#servicesContainer input[type='checkbox']");
+      checkboxes.forEach(cb => cb.checked = false);
+      
+      document.getElementById("storiesField").style.display = "none";
+      document.getElementById("windowWashExterior").style.display = "none";
+      document.getElementById("windowTrackCleaning").style.display = "none";
+      document.getElementById("roofWash").style.display = "none";
+      
+      const jobConditions = document.getElementById("jobConditionsSelect");
+      if (jobConditions) jobConditions.selectedIndex = -1;
+      
+      document.getElementById("windowWashConditions").style.display = "none";
+      document.getElementById("windowTrackConditions").style.display = "none";
+      document.getElementById("roofWashConditions").style.display = "none";
+      
+      const laborRateInput = document.getElementById("laborRateInput");
+      const discountRateInput = document.getElementById("discountRateInput");
+      const srpMarginInput = document.getElementById("srpMarginInput");
+      
+      if (laborRateInput) laborRateInput.value = "1";
+      if (discountRateInput) discountRateInput.value = "0";
+      if (srpMarginInput) srpMarginInput.value = "30";
+      
+      document.getElementById("discountTotal").textContent = "-$0.00";
+      document.getElementById("baseCostTotal").textContent = "$0.00";
+      document.getElementById("modifiersTotal").textContent = "$0.00";
+      document.getElementById("totalPrice").textContent = "$0.00";
+      document.getElementById("breakdown").innerHTML = "";
+      
+      cachedUnitFields = {};
+      currentPreset = null;
+      document.querySelectorAll(".preset-buttons button").forEach(btn => btn.classList.remove("active"));
+      hideErrors();
+    }
+    
+    function showSpinner(show) {
+      document.getElementById("spinner").style.display = show ? "block" : "none";
+    }
+    
+    fetchServices();
+  </script>
+</body>
+</html>
