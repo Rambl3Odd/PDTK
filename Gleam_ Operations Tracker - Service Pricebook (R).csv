@@ -1,0 +1,102 @@
+,,,,,,,,,
+Service Group ID,Sub Group ID,Service Name,Service Description,Unit,Time (Min/Unit),Consumable Cost/Unit,Labor Cost/Unit,Total Cost/Unit,SRP (30-50%)
+WC,E,Window Cleaning: Exterior,"Removes dirt, dust, water spots, and buildup from exterior glass surfaces using professional cleaning solutions and tools. Enhances visibility and curb appeal.",Pane,2,$0.10,$1.00,$1.10,$1.43
+WC,I,Window Cleaning: Interior,"Cleans interior window glass to remove smudges, fingerprints, and dust using streak-free cleaning techniques. Improves clarity and allows more natural light into the home.",Pane,2,$0.05,$1.00,$1.05,$1.37
+WC,T,Window Track Cleaning,"Removes dirt, dust, and debris from window tracks and sills using specialized tools and cleaning solutions. Helps improve window function and prevents buildup.",Track,3,$0.10,$1.50,$1.60,$2.08
+WC,C,Window Screen Cleaning,"Cleans window screens to remove dust, pollen, and debris. Restores airflow and visibility while maintaining screen integrity.",Screen,2,$0.08,$1.00,$1.08,$1.40
+WC,S,Window Screen Cleaning & Sealing,"Cleans window screens to remove dirt and debris, then applies a protective sealant to enhance durability, UV resistance, and lifespan.",Screen,5,$0.20,$2.50,$2.70,$3.51
+SR,R,Screen Repair: Rescreening,Standard screen replacement.,sq. ft.,10,$0.15,$5.00,$5.15,$6.70
+SR,F,Screen Repair: Screen Refurbish,"Includes minor repairs like corner replacements, pull tabs, or small patching.",sq. ft.,12,$0.15,$6.00,$6.15,$8.00
+SR,C,Screen Repair: Custom Screen and Frame Replacement,Full frame and screen replacement.,sq. ft.,15,$0.10,$7.50,$7.60,$9.88
+CM,O,Phases 2+4+5,,Job,95,$0.00,$47.50,$47.50,$61.75
+CM,X,Phase 0 (Mobilize+Deploy+Redeploy),,Mile,1.5,$0.25,$0.75,$1.00,$1.30
+WT,X,Window Tint Installation,"Applies high-quality solar control, privacy, or decorative window films to residential and commercial windows. Reduces glare, heat, and UV exposure, enhances privacy and security, and improves energy efficiency. Available in reflective, dual-reflective, blackout, and decorative finishes to suit different needs.",sq. ft.,9,$0.22,$4.50,$4.72,$6.14
+SP,C,Solar Panel Cleaning,"Removes dust, dirt, and debris from solar panels to improve efficiency and maximize energy output. Helps extend panel lifespan and maintain peak performance.",Panel,3,$0.07,$1.50,$1.57,$2.04
+SP,I,Solar Panel Inspection,"A detailed assessment of solar panels to check for damage, debris buildup, and performance issues. Ensures optimal function and early issue detection.",Panel,2,$0.00,$1.00,$1.00,$1.30
+SP,B,Solar Panel Bird Guard,"Installs protective barriers around solar panels to prevent birds and pests from nesting underneath. Reduces damage, noise, and maintenance costs.",Panel,10,$0.05,$5.00,$5.05,$6.57
+GR,H,Glass Restoration: Hard Water Stain Restoration,"Reduces the appearance of stubborn mineral deposits and calcium buildup on windows, shower glass, and exterior surfaces. Helps restore clarity and prevents further etching or damage.",Pane,30,$0.52,$15.00,$15.52,$20.18
+GR,M,Glass Restoration: Hard Water Mitigation,"Applies a protective sealant to glass surfaces to help repel minerals and prevent future hard water stains. Ideal for homes exposed to sprinkler overspray or high-mineral-content water, extending the time between cleanings.",Pane,10,$0.25,$5.00,$5.25,$6.83
+GR,S,Glass Restoration: Scratch Restoration,"Minimizes the visibility of scratches on windows, glass doors, and other surfaces using professional polishing techniques. Improves clarity and extends the life of the glass without costly replacements.",sq. ft.,100,$13.00,$50.00,$63.00,$94.50
+GC,X,Gutter Cleaning,"Clears leaves, debris, and blockages from gutters and downspouts to prevent water damage, leaks, and foundation issues. Enhances drainage and protects your home.",ln. ft.,2,$0.05,$1.00,$1.05,$1.37
+DV,C,Dryer Vent Cleaning,"Removes lint, debris, and buildup from the dryer vent system to improve airflow, reduce fire risk, and enhance dryer efficiency.",Vent,75,$0.05,$37.50,$37.55,$56.33
+DV,I,Dryer Vent Inspection,"A full inspection of the dryer vent system to identify blockages, damage, or safety concerns. Ensures proper ventilation and compliance with safety standards.",Vent,40,$0.00,$20.00,$20.00,$30.00
+GS,D,Deck Wash,"Deep cleans decks using pressure washing or soft washing to remove dirt, mildew, and hard water stains. Restores the natural beauty of your wood deck and prepares it for staining.",sq. ft.,1,$0.15,$0.50,$0.65,$0.85
+SS,R,Roof Wash,"Gently cleans roofing materials using a soft wash system to remove moss, algae, and dirt without damaging shingles. Extends roof lifespan and boosts curb appeal.",sq. ft.,1,$0.20,$0.50,$0.70,$0.91
+SS,H,House Wash,"Exterior home cleaning using soft washing to eliminate dirt, mildew, and stains from siding, stucco, and brick. Restores vibrancy while protecting surfaces.",sq. ft.,2,$0.18,$1.00,$1.18,$1.53
+FW,X,Fence Wash,"Cleans and revitalizes wood, vinyl, and metal fences by removing dirt, mold, and discoloration. Restores original appearance and prolongs fence life.",ln. ft.,1,$0.12,$0.50,$0.62,$0.81
+GS,D,Driveway/Sidewalk/Patios,"Pressure/Softwashing washing service for driveways, sidewalks, and patios to remove stains, grime, and buildup. Improves safety and enhances property aesthetics.",sq. ft.,1,$0.15,$0.50,$0.65,$0.85
+GS,P,Pavers,"Pressure/Softwashing washing service for paver block driveways, sidewalks, and patios to remove stains, grime, and buildup. Improves safety and enhances property aesthetics.",sq. ft.,1.5,$0.15,$0.75,$0.90,$1.17
+GS,S,Driveway/Sidewalk/Patios Seal,"Applies a protective sealant to concrete surfaces to guard against stains, moisture, and wear. Enhances durability and maintains a clean, polished look.",sq. ft.,1,$0.25,$0.50,$0.75,$0.98
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+Group,Sub-Group,Time/Cost Variable,Related Services,Add’l Min/Unit,Add’l Cost/Unit,Rationalization,,,
+Safety/Set-up,Unit Height,1 Story,"Window Cleaning: Exterior, Window Cleaning: Interior, Window Tint Installation",0,$0.00,Ground-level access requires no additional setup; baseline for pole or manual cleaning (How to Clean Windows).,,,
+Safety/Set-up,Unit Height,2 Stories,"Window Cleaning: Exterior, Window Tint Installation",1,$0.02,Pole extension or ladder repositioning adds minimal time; cost reflects extra hose wear (Water-Fed Pole Cleaning).,,,
+Safety/Set-up,Unit Height,3 Stories,"Window Cleaning: Exterior, Window Tint Installation",2,$0.05,Extended pole or ladder setup increases time; cost for additional hose length or gear wear (High Window Cleaning).,,,
+Safety/Set-up,Unit Height,4+ Stories,"Window Cleaning: Exterior, Window Tint Installation",5,$0.10,"Scissor lifts or harnesses required, significantly increasing setup time; cost for equipment use (Commercial Window Cleaning).",,,
+Safety/Set-up,Unit Height,1 Story,Gutter Cleaning,0,$0.00,Ground-level access with no extra setup; baseline for scoop or wand use (How to Clean Gutters).,,,
+Safety/Set-up,Unit Height,2 Stories,Gutter Cleaning,1,$0.02,Quick ladder moves per section add minimal time; cost for ladder wear (Gutter Cleaning Tips).,,,
+Safety/Set-up,Unit Height,3 Stories,Gutter Cleaning,2,$0.05,Longer ladders or multiple repositions increase time; cost for extended tools (High Gutter Cleaning).,,,
+Safety/Set-up,Unit Height,4+ Stories,Gutter Cleaning,4,$0.10,"Roof access or lifts needed, less frequent than windows but significant setup; cost for equipment (Commercial Gutter Cleaning).",,,
+Safety/Set-up,Unit Height,1 Story,Roof Wash,0,$0.00,Flat or ground-level roof access requires no extra setup; baseline for soft washing (How to Soft Wash a Roof).,,,
+Safety/Set-up,Unit Height,2 Stories,Roof Wash,2,$0.02,Ladder climb to roof adds time; cost for minimal gear wear (Roof Access Safety).,,,
+Safety/Set-up,Unit Height,3 Stories,Roof Wash,3,$0.05,Higher ladder or initial harness setup increases time; cost for safety gear (High Roof Washing).,,,
+Safety/Set-up,Unit Height,4+ Stories,Roof Wash,6,$0.15,Harnesses or lifts for steep commercial roofs add significant time; cost for equipment and safety (Commercial Roof Cleaning).,,,
+Safety/Set-up,Unit Height,1 Story,"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",0,$0.00,Ground-level or flat roof access; baseline for pole cleaning (How to Clean Solar Panels).,,,
+Safety/Set-up,Unit Height,2 Stories,"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",2,$0.02,Ladder climb or pole extension adds time; cost for minimal wear (Solar Panel Roof Access).,,,
+Safety/Set-up,Unit Height,3 Stories,"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",3,$0.05,Higher ladder or harness prep increases time; cost for gear (High Solar Panel Cleaning).,,,
+Safety/Set-up,Unit Height,4+ Stories,"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",6,$0.15,Lifts or harnesses for tall structures add significant setup; cost for equipment (Commercial Solar Cleaning).,,,
+Safety/Set-up,Unit Accessibility,Non-obstructed,"Window Cleaning: Exterior, Window Cleaning: Interior, Window Track Cleaning, Window Screen Cleaning, Window Screen Cleaning & Sealing, Screen Repair: Rescreening, Screen Repair: Screen Refurbish, Screen Repair: Custom Screen and Frame Replacement, Solar Panel Inspection, Solar Panel Cleaning, Window Tint Installation, Solar Panel Bird Guard, Glass Restoration: Hard Water Stain Restoration, Glass Restoration: Hard Water Mitigation, Glass Restoration: Scratch Restoration, Gutter Cleaning, Dryer Vent Cleaning, Dryer Vent Inspection, Deck Wash, Roof Wash, House Wash, Fence Wash, Driveway/Sidewalk/Patios, Pavers, Driveway/Sidewalk/Patios Seal",0,$0.00,Direct access requires no additional effort; baseline for all exterior tasks (General Accessibility).,,,
+Safety/Set-up,Unit Accessibility,Obstructed,Window Cleaning: Exterior,1,$0.02,Shrubs or fences slow hose or ladder moves; cost for minor hose wear (Window Cleaning Obstacles).,,,
+Safety/Set-up,Unit Accessibility,Obstructed,Gutter Cleaning,1,$0.02,Fences delay ladder repositioning; cost for ladder adjustments (Gutter Accessibility).,,,
+Safety/Set-up,Unit Accessibility,Obstructed,"Pavers, Driveway/Sidewalk/Patios Seal, Driveway/Sidewalk/Patios, Fence Wash, House Wash",2,$0.05,Hose drag over landscaping adds time; cost for extra water/solution (Pressure Washing Obstacles).,,,
+Safety/Set-up,Unit Accessibility,Obstructed,Roof Wash,1,$0.02,Minor obstacles to roof access slow setup; cost for gear wear (Roof Washing Accessibility).,,,
+Safety/Set-up,Unit Accessibility,Obstructed,"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",1,$0.02,Obstacles to roof access add minimal time; cost for pole wear (Solar Panel Accessibility).,,,
+Safety/Set-up,Unit Accessibility,Inaccessible,Window Cleaning: Exterior,4,$0.10,"Lifts or ropes for high, blocked panes add significant setup; cost for equipment (High Window Access).",,,
+Safety/Set-up,Unit Accessibility,Inaccessible,Gutter Cleaning,3,$0.10,Roof-only access delays work; cost for harness setup (Inaccessible Gutters).,,,
+Safety/Set-up,Unit Accessibility,Inaccessible,Roof Wash,5,$0.15,Harnesses or lifts for steep/inaccessible roofs add time; cost for safety gear (Roof Safety).,,,
+Safety/Set-up,Unit Accessibility,Inaccessible,"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",5,$0.15,Harnesses or lifts for steep roofs add setup; cost for equipment (Solar Panel Safety).,,,
+Safety/Set-up,Unit Navigability,Flat (0/12–2/12),Roof Wash,0,$0.00,Flat roofs require no extra setup; baseline for soft washing (Flat Roof Cleaning).,,,
+Safety/Set-up,Unit Navigability,Low Slope (3/12–5/12),Roof Wash,0.5,$0.02,Slight slope adds minimal caution time; cost for gear wear (Low Slope Roof).,,,
+Safety/Set-up,Unit Navigability,Moderate (6/12–8/12),Roof Wash,1.5,$0.05,Safety gear setup increases time; cost for harnesses (Moderate Roof).,,,
+Safety/Set-up,Unit Navigability,Steep (9/12+),Roof Wash,3,$0.10,Harnesses and runoff management add time; cost for safety and solution (Steep Roof Cleaning).,,,
+Safety/Set-up,Unit Navigability,Flat (0/12–2/12),"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",0,$0.00,Flat roofs need no extra setup; baseline for pole use (Flat Solar Cleaning).,,,
+Safety/Set-up,Unit Navigability,Low Slope (3/12–5/12),"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",0.5,$0.02,Slight slope adds minimal pole adjustment; cost for wear (Low Slope Solar).,,,
+Safety/Set-up,Unit Navigability,Moderate (6/12–8/12),"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",1,$0.03,Pole efficiency reduces time vs. Roof Washing; cost for gear (Moderate Solar).,,,
+Safety/Set-up,Unit Navigability,Steep (9/12+),"Solar Panel Cleaning, Solar Panel Inspection, Solar Panel Bird Guard",2,$0.05,"Harnesses needed, but poles lessen runoff impact; cost for safety (Steep Solar Cleaning).",,,
+Execution Time,Unit Contamination,Recent (<6 months),Window Cleaning: Exterior,0,$0.00,"Recent cleaning means light dust, no extra effort; baseline (Window Cleaning Frequency).",,,
+Execution Time,Unit Contamination,Moderate (6–12 months),"Window Cleaning: Exterior, Window Cleaning: Interior",1,$0.05,Typical soiling (pollen) needs slight extra scrubbing; cost for soap (Moderate Window Cleaning).,,,
+Execution Time,Unit Contamination,Heavy (>12 months),Window Cleaning: Exterior,3,$0.15,Heavy buildup requires more time and solution; cost for extra cleaner (Heavy Window Cleaning).,,,
+Execution Time,Unit Contamination,Post-Construction,"Window Cleaning: Exterior, Window Cleaning: Interior",6,$0.25,Paint/adhesives double time with razor blades; cost for heavy-duty cleaner (Post-Construction Cleaning).,,,
+Execution Time,Unit Contamination,Light,Roof Wash,0,$0.00,Light debris needs no extra time; baseline for soft washing (Light Roof Cleaning).,,,
+Execution Time,Unit Contamination,Moderate,Roof Wash,1,$0.10,Light moss requires brief dwell; cost for solution (Moderate Roof Cleaning).,,,
+Execution Time,Unit Contamination,Heavy,Roof Wash,4,$0.25,Thick algae needs extended dwell and scrubbing; cost for more solution (Heavy Roof Cleaning).,,,
+Execution Time,Unit Contamination,Light,"Pavers, Driveway/Sidewalk/Patios Seal, Driveway/Sidewalk/Patios, Fence Wash",0,$0.00,Light dirt needs no extra effort; baseline for pressure washing (Light Pressure Washing).,,,
+Execution Time,Unit Contamination,Moderate,"Pavers, Driveway/Sidewalk/Patios Seal, Driveway/Sidewalk/Patios, Fence Wash",2,$0.15,Moderate stains need pre-treatment and passes; cost for detergent (Moderate Pressure Washing).,,,
+Execution Time,Unit Contamination,Heavy,"Pavers, Driveway/Sidewalk/Patios Seal, Driveway/Sidewalk/Patios, Fence Wash",5,$0.30,Oil/thick debris needs degreaser and multiple passes; cost for chemicals (Heavy Pressure Washing).,,,
+Execution Time,Unit Contamination,Light,Dryer Vent Cleaning,0,$0.00,Light lint needs no extra effort; baseline for vacuum use (Dryer Vent Cleaning).,,,
+Execution Time,Unit Contamination,Moderate,Dryer Vent Cleaning,2,$0.05,Moderate buildup needs vacuum and brush; cost for minimal cleaner (Moderate Dryer Vent).,,,
+Execution Time,Unit Contamination,Heavy,Dryer Vent Cleaning,4,$0.10,Heavy lint requires rotary brush and deep cleaning; cost for tools (Heavy Dryer Vent).,,,
+Execution Time,Unit Contamination,Light,Gutter Cleaning,0,$0.00,Light debris needs no extra effort; baseline for scoop (Light Gutter Cleaning).,,,
+Execution Time,Unit Contamination,Moderate,Gutter Cleaning,1,$0.05,Moderate leaves need scoop and flush; cost for water (Moderate Gutter Cleaning).,,,
+Execution Time,Unit Contamination,Heavy,Gutter Cleaning,3,$0.10,Thick debris needs extensive scooping and flushing; cost for water/tools (Heavy Gutter Cleaning).,,,
+Execution Time,Unit Features,Small,"Window Cleaning: Exterior, Window Cleaning: Interior, Window Tint Installation, Screen Repair: Rescreening, Screen Repair: Custom Screen and Frame Replacement, Glass Restoration: Scratch Restoration, Window Screen Cleaning & Sealing",-1,-$0.02,Smaller units reduce cleaning time and solution; savings from efficiency (Small Surface Cleaning).,,,
+Execution Time,Unit Features,Standard (>8 sq. ft.),"Window Cleaning: Exterior, Window Cleaning: Interior, Window Tint Installation, Screen Repair: Rescreening, Screen Repair: Custom Screen and Frame Replacement, Glass Restoration: Scratch Restoration, Window Screen Cleaning & Sealing",0,$0.00,Baseline size for standard cleaning methods (Standard Surface Cleaning).,,,
+Execution Time,Unit Features,Large (>16 sq. ft.),"Window Cleaning: Exterior, Window Cleaning: Interior, Window Tint Installation, Screen Repair: Rescreening, Screen Repair: Custom Screen and Frame Replacement, Glass Restoration: Scratch Restoration, Window Screen Cleaning & Sealing",2,$0.10,Larger surfaces need more passes and solution; cost for extra cleaner (Large Surface Cleaning).,,,
+Execution Time,Unit Features,Skylights/Storm Windows,"Window Cleaning: Exterior, Window Cleaning: Interior, Window Tint Installation, Screen Repair: Rescreening, Screen Repair: Custom Screen and Frame Replacement, Glass Restoration: Scratch Restoration, Window Screen Cleaning & Sealing",3,$0.15,Awkward angles add time and care; cost for solution and tools (Skylight Cleaning).,,,
+Execution Time,Unit Features,Multipane/French Pane,"Window Cleaning: Exterior, Window Cleaning: Interior, Window Tint Installation, Screen Repair: Rescreening, Screen Repair: Custom Screen and Frame Replacement, Glass Restoration: Scratch Restoration, Window Screen Cleaning & Sealing",4,$0.20,Multiple panes require individual passes; cost for more solution (Multipane Cleaning).,,,
+Execution Time,Unit Material,"Durable (Vinyl, Metal)",Roof Wash,0,$0.00,Durable materials need no extra care; baseline for soft washing (Durable Roof Cleaning).,,,
+Execution Time,Unit Material,Less Durable (Asphalt Shingles),Roof Wash,1,$0.05,Gentler soft washing adds slight time; cost for minimal solution (Shingle Cleaning).,,,
+Execution Time,Unit Material,Porous (Wood),Roof Wash,1.5,$0.10,Porous wood needs moderate dwell; cost for absorbed solution (rare case) (Porous Roof Cleaning).,,,
+Execution Time,Unit Material,"Durable (Vinyl, Metal)",House Wash,0,$0.00,Durable siding needs no extra care; baseline for soft washing (Durable Siding Cleaning).,,,
+Execution Time,Unit Material,Less Durable (Older Siding),House Wash,1,$0.05,Gentler methods add slight time; cost for minimal solution (Older Siding Cleaning).,,,
+Execution Time,Unit Material,Porous (Stucco),House Wash,2,$0.20,Porous stucco needs longer dwell and more solution; cost for absorption (Stucco Cleaning).,,,
+Execution Time,Unit Material,"Durable (Vinyl, Metal)",Fence Wash,0,$0.00,Durable fences need no extra care; baseline for pressure washing (Durable Fence Cleaning).,,,
+Execution Time,Unit Material,Wood,Fence Wash,1.5,$0.10,Wood requires care and cleaner; cost for solution (Wood Fence Cleaning).,,,
+Execution Time,Unit Material,Durable (Concrete),"Driveway/Sidewalk/Patios, Driveway/Sidewalk/Patios Seal",0,$0.00,Durable concrete needs no extra care; baseline for pressure washing (Concrete Cleaning).,,,
+Execution Time,Unit Material,Wood,"Driveway/Sidewalk/Patios, Driveway/Sidewalk/Patios Seal",1.5,$0.10,Wood decks need care and cleaner; cost for solution (Wood Deck Cleaning).,,,
+Optional: Execution Time,Equipment Efficiency,Water-Fed Pole,Window Cleaning: Exterior,-1,-$0.05,Pole reduces ladder time and solution use; savings from efficiency (Water-Fed Pole Benefits).,,,
+Optional: Execution Time,Equipment Efficiency,Surface Cleaner,"Pavers, Driveway/Sidewalk/Patios, Driveway/Sidewalk/Patios Seal",-2,-$0.10,Surface cleaner speeds up large areas; savings from water/solution (Surface Cleaner Use).,,,
+Optional: Modifier,Weather Impact,Sun,"Window Cleaning: Exterior, Window Cleaning: Interior, Glass Restoration: Hard Water Stain Restoration, Glass Restoration: Hard Water Mitigation",1,$0.02,"Sun causes streaking, adding wiping time; cost for extra solution (Sunny Day Cleaning).",,,
+Optional: Modifier,Weather Impact,Rain,,2,$0.05,Rain delays drying and increases safety time; cost for gear/solution (Rain Impact).,,,
